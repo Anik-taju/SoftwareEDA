@@ -54,7 +54,7 @@ public class Funcionario extends JFrame {
         comboSexo = new JComboBox<>(new String[]{"Masculino", "Feminino", "Outro"});
     
         // Botões
-        btnAdicionar = new JButton("Adicionar");
+        btnAdicionar = new JButton("Adicionar")
         btnLogout = new JButton("Logout");
         estilizarBotao(btnAdicionar);
         estilizarBotao(btnBuscar);
