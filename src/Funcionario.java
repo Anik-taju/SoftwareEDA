@@ -1,173 +1,115 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class Funcionario extends JFrame {
 
+    // === Atributos ===
+    private JTextField txtNome, txtIdade, txtAltura, txtBairro, txtNaturalidade, txtNacionalidade;
+    private JTextField txtDataNasc, txtDocumento, txtBuscar;
+    private JComboBox<String> comboSexo, comboDoc;
+    private JButton btnAdicionar, btnBuscar, btnLogout;
+    private JPanel painelBotoes, painelBusca;
+
     public Funcionario() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Tela Funcionario");
-        setSize(600, 700);
-        setLocationRelativeTo(null);
+        instanciar();
+        Layouts();
+        Funcao();
+    }
+    public void actionPerformed(ActionEvent e){
+        String nome = txtNome.getText();
+        String idade = txtIdade.getText();
+        String altura = txtAltura.getText();
+        String bairro = txtBairro.getText();
+        String nacionalidade = txtNacionalidade.getText();
+        String naturalidade = txtNaturalidade.getText();
+        String dataNascimento = txtDataNasc.getText();
+        String nrDoc = txtDocumento.getText();
 
-        // Fundo suave
-        getContentPane().setBackground(new Color(230, 230, 250));
-
-        // Layout principal centralizado
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 8, 8, 8); // margem entre componentes
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        int linha = 0; // linha inicial
-
-        // Título centralizado
-        JLabel titulo = new JLabel("Funcionário", JLabel.CENTER);
-        titulo.setFont(new Font("Arial", Font.BOLD, 20));
-        gbc.gridx = 0;
-        gbc.gridy = linha++;
-        gbc.gridwidth = 2;
-        add(titulo, gbc);
-
-        gbc.gridwidth = 1; // resetar
-
-        // Nome
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Nome:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtNome = new JTextField(15);
-        add(txtNome, gbc);
-        linha++;
-
-        // Sexo (ComboBox)
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Sexo:"), gbc);
-
-        gbc.gridx = 1;
-        JComboBox<String> comboSexo = new JComboBox<>(new String[]{"Masculino", "Feminino", "Outro"});
-        add(comboSexo, gbc);
-        linha++;
-
-        // Idade
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Idade:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtIdade = new JTextField(15);
-        add(txtIdade, gbc);
-        linha++;
-
-        // Altura
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Altura:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtAltura = new JTextField(15);
-        add(txtAltura, gbc);
-        linha++;
-
-        // Bairro
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Bairro:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtBairro = new JTextField(15);
-        add(txtBairro, gbc);
-        linha++;
-
-        // Naturalidade
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Naturalidade:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtNaturalidade = new JTextField(15);
-        add(txtNaturalidade, gbc);
-        linha++;
-
-        // Nacionalidade
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Nacionalidade:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtNacionalidade = new JTextField(15);
-        add(txtNacionalidade, gbc);
-        linha++;
-
-        // Data de nascimento
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Data de Nascimento:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtDataNasc = new JTextField(15);
-        add(txtDataNasc, gbc);
-        linha++;
-
-        // Documento (ComboBox + campo de texto)
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Tipo de Documento:"), gbc);
-
-        gbc.gridx = 1;
-        JComboBox<String> comboDoc = new JComboBox<>(new String[]{
-                "BI", "Carta de Condução", "Cartão de Eleitor", "Passaporte"
-        });
-        add(comboDoc, gbc);
-        linha++;
-
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Número Documento:"), gbc);
-
-        gbc.gridx = 1;
-        JTextField txtDocumento = new JTextField(15);
-        add(txtDocumento, gbc);
-        linha++;
-
-        // Campo Buscar + Botão
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        add(new JLabel("Buscar Funcionário:"), gbc);
-
-        gbc.gridx = 1;
-        JPanel painelBusca = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
-        JTextField txtBuscar = new JTextField(10);
-        JButton btnBuscar = new JButton("Buscar");
-        estilizarBotao(btnBuscar);
-        painelBusca.add(txtBuscar);
-        painelBusca.add(btnBuscar);
-        add(painelBusca, gbc);
-        linha++;
-
-        // Botões finais (Adicionar e Logout)
-        gbc.gridx = 0;
-        gbc.gridy = linha;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
-
-        JButton btnAdicionar = new JButton("Adicionar");
-        estilizarBotao(btnAdicionar);
-
-        JButton btnLogout = new JButton("Logout");
-        estilizarBotao(btnLogout);
-
-        painelBotoes.add(btnAdicionar);
-        painelBotoes.add(btnLogout);
-
-        add(painelBotoes, gbc);
-
-        setVisible(true);
     }
 
-    // Método para estilizar botões
+    // === Layout principal ===
+    public void Layouts() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Tela Inscricao");
+        setSize(600, 700);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(230, 230, 250));
+        setLayout(new GridBagLayout());
+    }
+
+    // === Criação dos componentes ===
+    public void instanciar() {
+        // Campos de texto
+        txtNome = new JTextField(15);
+        txtIdade = new JTextField(15);
+        txtAltura = new JTextField(15);
+        txtBairro = new JTextField(15);
+        txtNaturalidade = new JTextField(15);
+        txtNacionalidade = new JTextField(15);
+        txtDataNasc = new JTextField(15);
+        txtDocumento = new JTextField(15);
+
+        // Combos
+        comboSexo = new JComboBox<>(new String[]{"Masculino", "Feminino", "Outro"});
+    
+        // Botões
+        btnAdicionar = new JButton("Adicionar");
+        btnLogout = new JButton("Logout");
+        estilizarBotao(btnAdicionar);
+        estilizarBotao(btnBuscar);
+        estilizarBotao(btnLogout);
+
+        // Painéis
+        painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
+        painelBusca = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+    }
+
+    // === Organização dos componentes na tela ===
+    public void Funcao() {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(8, 8, 8, 8);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        int linha = 0;
+
+        // Título
+        JLabel titulo = new JLabel("Funcionário", JLabel.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 20));
+        gbc.gridx = 0; gbc.gridy = linha++; gbc.gridwidth = 2;
+        add(titulo, gbc);
+        gbc.gridwidth = 1;
+
+        // Linhas de campos
+        adicionarLinha(gbc, linha++, "Nome:", txtNome);
+        adicionarLinha(gbc, linha++, "Sexo:", comboSexo);
+        adicionarLinha(gbc, linha++, "Idade:", txtIdade);
+        adicionarLinha(gbc, linha++, "Altura:", txtAltura);
+        adicionarLinha(gbc, linha++, "Bairro:", txtBairro);
+        adicionarLinha(gbc, linha++, "Naturalidade:", txtNaturalidade);
+        adicionarLinha(gbc, linha++, "Nacionalidade:", txtNacionalidade);
+        adicionarLinha(gbc, linha++, "Data de Nascimento:", txtDataNasc);
+        adicionarLinha(gbc, linha++, "Número de BI", txtDocumento);
+
+        
+
+        // Painel de botões
+        painelBotoes.add(btnAdicionar);
+        painelBotoes.add(btnLogout);
+        gbc.gridx = 0; gbc.gridy = linha; gbc.gridwidth = 2; gbc.anchor = GridBagConstraints.CENTER;
+        add(painelBotoes, gbc);
+    }
+
+    // === Método auxiliar para montar linhas ===
+    private void adicionarLinha(GridBagConstraints gbc, int linha, String label, Component componente) {
+        gbc.gridx = 0;
+        gbc.gridy = linha;
+        add(new JLabel(label), gbc);
+
+        gbc.gridx = 1;
+        add(componente, gbc);
+    }
+
+    // === Estilo dos botões ===
     private void estilizarBotao(JButton botao) {
         botao.setBackground(new Color(70, 130, 180));
         botao.setForeground(Color.WHITE);
@@ -175,7 +117,11 @@ public class Funcionario extends JFrame {
         botao.setPreferredSize(new Dimension(120, 35));
     }
 
+    // === MAIN ===
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Funcionario::new);
+        SwingUtilities.invokeLater(() -> {
+            Funcionario janela = new Funcionario();
+            janela.setVisible(true);
+        });
     }
 }
