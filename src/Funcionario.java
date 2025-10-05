@@ -146,23 +146,42 @@ public class Funcionario extends JFrame implements ActionListener {
         estilizarBotao(btnBuscar);
     }
 
-    public void Accao() {
-        btnAdicionar.addActionListener(this);
-        btnLogout.addActionListener(this);
-        btnBuscar.addActionListener(this);
-    }
-
     private void estilizarBotao(JButton botao) {
         botao.setBackground(new Color(70, 130, 180));
         botao.setForeground(Color.WHITE);
         botao.setFocusPainted(false);
         botao.setPreferredSize(new Dimension(120, 35));
     }
+    
+    public void Accao() {
+        btnAdicionar.addActionListener(this);
+        btnLogout.addActionListener(this);
+        btnBuscar.addActionListener(this);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+    	BackFuncionario backF = new  BackFuncionario ();
+    	
+    	String Nome = txtNome.getText();
+    	String Sexo = comboSexo.getSelectedItem().toString();
+    	String Idade = txtIdade.getText();
+    	String Altura = txtAltura.getText();
+    	String Bairro = txtBairro.getText();
+    	String Naturalidade = txtNaturalidade.getText();
+    	String Nacionalidade = txtNacionalidade.getText();
+    	String DataNascimento = txtDataNasc.getText();
+    	String TipoDocumento = comboDocumento.getSelectedItem().toString();
+    	String NumeroDocumento = txtNumDocumento.getText();
+
         if (e.getSource() == btnAdicionar) {
-            JOptionPane.showMessageDialog(this, "Adicionar Funcionário");
+    	        // Adicionar
+    	        if (Nome.isEmpty() || Sexo.isEmpty() || Idade.isEmpty() || Altura.isEmpty() || Bairro.isEmpty() || Naturalidade.isEmpty()) {
+    	            JOptionPane.showMessageDialog(null, "Preencha Todos os campos.");
+    	        } else {
+    	        	 backF.Escrever( Nome, Sexo, Idade, Altura,Bairro, Naturalidade, Nacionalidade, DataNascimento, TipoDocumento, NumeroDocumento);
+    		         JOptionPane.showMessageDialog(null, "Estudante Adicionado com sucesso");
+    	        }
         } else if (e.getSource() == btnLogout) {
             JOptionPane.showMessageDialog(this, "Logout efetuado");
         } else if (e.getSource() == btnBuscar) {

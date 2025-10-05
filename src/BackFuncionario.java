@@ -15,41 +15,55 @@ public class BackFuncionario {
     private  String DataNascimento;
     private  String TipoDocumento;
     private  String NumeroDocumento;
-    
+    private static int criarId = 0;
 	String cArquivo = "src\\Salvar\\Estudante.txt";
 	
 	public BackFuncionario() {}
-	public BackFuncionario(String usuario, String senha) {
-		this.usuario = usuario;
-		this.senha = senha;
-		
-		Ler(usuario, senha);
-		Escrever(usuario, senha);
+	public BackFuncionario(String Nome, String Sexo,String Idade, String Altura, String Bairro, String Naturalidade, String Nacionalidade, String DataNascimento, String TipoDocumento, String NumeroDocumento, int criarId) {
+        this.Nome = Nome;
+        this.Sexo = Sexo;
+        this.Idade = Idade;
+        this.Altura = Altura;
+        this.Bairro = Bairro;
+        this.Naturalidade = Naturalidade;
+        this.Nacionalidade = Nacionalidade;
+        this.DataNascimento = DataNascimento;
+        this.TipoDocumento = TipoDocumento;
+        this.NumeroDocumento = NumeroDocumento;
+        this.criarId = criarId;
 	}
 	
-	public void Escrever(String usuario, String senha) {
+	public void Escrever(String Nome, String Sexo,String Idade, String Altura, String Bairro, String Naturalidade, String Nacionalidade, String DataNascimento, String TipoDocumento, String NumeroDocumento) {	
         boolean acresArquivo = true;
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(cArquivo, acresArquivo))) {
-            escritor.write(usuario + "," + senha);
+        	criarId++;
+            escritor.write( Nome + "," +
+                    Sexo + "," +
+                    Idade + "," +
+                    Altura + "," +
+                    Bairro + "," +
+                    Naturalidade + "," +
+                    Nacionalidade + "," +
+                    DataNascimento + "," +
+                    TipoDocumento + "," +
+                    NumeroDocumento+ "; ID: " + criarId);
             escritor.newLine();
-            System.out.println("Usuário salvo com sucesso no ficheiro!");
+            System.out.println("Estudante salvo com sucesso no ficheiro!");
         } catch (Exception erro) {
             System.out.println("Houve um erro na gravação. Tente novamente.");
         }
     }
 	
-    public boolean Ler(String usuario, String senha) {
+    public boolean Ler(String usuario) {
         try (BufferedReader leitor = new BufferedReader(new FileReader(cArquivo))) {
             String linha;
             while ((linha = leitor.readLine()) != null) {
                 // Separar usuario e senha da linha
                 String[] dados = linha.split(",");
                 if (dados.length == 2) {
-                    String usuarioArquivo = dados[0].trim();
-                    String senhaArquivo = dados[1].trim();
-
-                    if (usuario.equalsIgnoreCase(usuarioArquivo) && senha.equals(senhaArquivo)) {
-                        System.out.println("Login encontrado!");
+                    String Nomearq = dados[0].trim();
+                    if (usuario.equalsIgnoreCase(Nomearq)) {
+                        System.out.println("Estudante encontrado!");
                         return true;
                     }
                 }
@@ -59,5 +73,4 @@ public class BackFuncionario {
         }
         return false;
     }
-
 }
