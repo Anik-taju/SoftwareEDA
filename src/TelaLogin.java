@@ -1,7 +1,10 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class TelaLogin {
+public class TelaLogin implements ActionListener  {
 	//Tela Principal
 	private JFrame main;
 	
@@ -42,6 +45,7 @@ public class TelaLogin {
 		Funcao();
 		Fontes();
 		Cores();
+		Accao();
 	}
 	
 	public void instanciar() {
@@ -155,4 +159,41 @@ public class TelaLogin {
 	    tela4.setBackground(Color.decode("#AED6F1"));
 	    telaArm2.setBackground(Color.decode("#AED6F1"));
 	}
+	
+	public void Accao() {
+		login.addActionListener(this);
+		singUp.addActionListener(this);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	    BackTelaLogin back = new BackTelaLogin();
+
+	    String usuario = userSpace.getText();
+	    String senha = new String(pasSpace.getPassword());
+
+	    if (e.getSource() == login) {
+	        // Login
+	        if (usuario.isEmpty() || senha.isEmpty()) {
+	            JOptionPane.showMessageDialog(null, "Preencha usuário e senha.");
+	            
+	        } else if(usuario.equalsIgnoreCase("AdminAnik") && senha.equalsIgnoreCase("123Anik")) {
+	        	JOptionPane.showMessageDialog(null, "Login bem sucedido, Bem vindo Administrador");
+	        	
+	        }else if (back.Ler(usuario, senha)) {
+	            JOptionPane.showMessageDialog(null, "Login bem sucedido");
+	            
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos ou nao registrados");
+	        }
+	    } else if (e.getSource() == singUp) {
+	        // Sing up
+	        if (usuario.isEmpty() || senha.isEmpty()) {
+	            JOptionPane.showMessageDialog(null, "Preencha usuário e senha.");
+	        } else {
+	            back.Escrever(usuario, senha);
+	            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+	        }
+	    }
+	}		
 }
