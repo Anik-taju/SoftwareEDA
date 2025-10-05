@@ -183,7 +183,8 @@ public class Funcionario extends JFrame implements ActionListener {
     		         JOptionPane.showMessageDialog(null, "Estudante Adicionado com sucesso");
     	        }
         } else if (e.getSource() == btnLogout) {
-            JOptionPane.showMessageDialog(this, "Logout efetuado");
+        	dispose();
+        	Admin admin = new Admin();
         } else if (e.getSource() == btnBuscar) {
             String busca = txtBuscar.getText();
             JOptionPane.showMessageDialog(this, "Buscar: " + busca);

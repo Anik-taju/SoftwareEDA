@@ -21,18 +21,28 @@ public class Admin implements ActionListener{
     // ==== BOTÕES ====
     private JButton addButton;
     private JButton searchButton;
-    private JButton editButton;
     private JButton removeButton;
     private JButton logoutButton;
-
-    // ==== CONSTRUTOR ====
-    public Admin() {
+    
+	private String usuario;
+	private String senha;
+	
+    public Admin(String usuario, String senha) {
+        this.usuario = usuario;
+        this.senha = senha;
         instanciar();
         Layouts();
         Funcao();
         Fontes();
         Cores();
         Accao();
+        main.setVisible(true);
+    }
+    
+    // ==== CONSTRUTOR ====
+    public Admin() {
+    	instanciar();
+    	main.setVisible(true);
     }
 
     // ==== INICIALIZAÇÃO DE COMPONENTES ====
@@ -47,7 +57,6 @@ public class Admin implements ActionListener{
 
         addButton = new JButton("Adicionar");
         searchButton = new JButton("Buscar");
-        editButton = new JButton("Editar");
         removeButton = new JButton("Remover");
         logoutButton = new JButton("Sair");
     }
@@ -67,14 +76,13 @@ public class Admin implements ActionListener{
 
         buttonPanel.add(addButton);
         buttonPanel.add(searchButton);
-        buttonPanel.add(editButton);
         buttonPanel.add(removeButton);
         buttonPanel.add(logoutButton);
 
         topPanel.add(buttonPanel);
 
         main.add(topPanel, BorderLayout.NORTH);
-        main.setVisible(true);
+        
         main.setSize(500, 400);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setLocationRelativeTo(null);
@@ -86,7 +94,6 @@ public class Admin implements ActionListener{
         textField.setFont(fonte);
         addButton.setFont(fonte);
         searchButton.setFont(fonte);
-        editButton.setFont(fonte);
         removeButton.setFont(fonte);
         logoutButton.setFont(fonte);
     }
@@ -101,25 +108,30 @@ public class Admin implements ActionListener{
     public void Accao() {
         this.addButton.addActionListener(this);
         this.searchButton.addActionListener(this);
-        this.editButton.addActionListener(this);
         this.removeButton.addActionListener(this);
         this.logoutButton.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    	
+
         if (e.getSource() == this.addButton) {
+        	main.dispose();
         	Funcionario funcionario = new Funcionario();
+        	
         } else if (e.getSource() == this.searchButton) {
             // ação do botão buscar
-        } else if (e.getSource() == this.editButton) {
-            // ação do botão editar
-        } else if (e.getSource() == this.removeButton) {
-            // ação do botão remover
-        } else if (e.getSource() == this.logoutButton) {
-            // ação do botão sair
+        	
         }
+        else if (this.usuario.equalsIgnoreCase("AdminAnik") && this.senha.equalsIgnoreCase("123Anik")) {
+            if(e.getSource() == this.removeButton) {
+            	JOptionPane.showMessageDialog(null, "Voce e um administrador");
+            }
+        }
+        else if(e.getSource() == this.removeButton) {
+        	//por Opcao remover Aqui!!!
+        }
+
     }
 
     // ==== MAIN ====

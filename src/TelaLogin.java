@@ -176,12 +176,11 @@ public class TelaLogin implements ActionListener  {
 	        // Login
 	        if (usuario.isEmpty() || senha.isEmpty()) {
 	            JOptionPane.showMessageDialog(null, "Preencha usuário e senha.");
-	            
 	        } else if(usuario.equalsIgnoreCase("AdminAnik") && senha.equalsIgnoreCase("123Anik")) {
-	        	JOptionPane.showMessageDialog(null, "Login bem sucedido, Bem vindo Administrador");
-	        	
+	        	Admin admin1 = new Admin(usuario, senha);
 	        }else if (back.Ler(usuario, senha)) {
-	            JOptionPane.showMessageDialog(null, "Login bem sucedido");
+	        	main.dispose();
+	        	Admin admin = new Admin(usuario, senha);
 	            
 	        } else {
 	            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos ou nao registrados");
