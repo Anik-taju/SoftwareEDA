@@ -1,28 +1,10 @@
-// File: InterfaceGeral.java
-public interface InterfaceGeral {
-    // Adiciona elemento em uma posição específica
-    void adicinaPosicao(int posicao, Estudante elemento);
-
-    // Adiciona elemento no fim da lista
-    void adicionaFim(Estudante elemento);
-
-    // Adiciona elemento no início da lista
-    void adicionaInicio(Estudante elemento);
-
-    // Verifica se a lista contém o elemento
-    boolean contem(Estudante elemento);
-
-    // Retorna a posição do elemento (mensagem)
-    String pegaPosicao(Estudante elemento);
-
-    // Remove o último elemento
-    void removeFim();
-
-    // Remove o primeiro elemento
+public interface InterfaceGeral<T> {
+    void adicionaInicio(T elemento);
+    void adicionaFim(T elemento);
+    void adicinaPosicao(int posicao, T elemento);
     void removeInicio();
-
-    // Remove elemento em posição específica
+    void removeFim();
     void removePosicao(int posicao);
-
-    
+    boolean contem(T elemento);
+    String pegaPosicao(T elemento);
 }
